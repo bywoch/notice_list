@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/* 초기화 */
+* {margin: 0; padding: 0; line-height: 1; vertical-align: top; border: 0;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+body {font-family: 'notokr-demilight'; font-size: 16px; letter-spacing: -.025em;}
+a {color: inherit; text-decoration: none;}
+ol, ul, dl {list-style: none;}
+h1, h2, h3, h4, h5, h6 {font-weight: normal;}
+img, video {border: 0 none; vertical-align: bottom;}
+table {border-collapse: collapse; border-spacing: 0;}
+table caption {position: absolute; overflow: hidden; clip: rect(0 0 0 0); width: 1px; height: 1px; margin: -1px;}
+button span {position: relative;}
+.ellipsis-multi {text-overflow: ellipsis; overflow: hidden; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-wrap: break-word;}
+.ellipsis {overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.blind {position: absolute; overflow: hidden; clip: rect(0 0 0 0); width: 1px; height: 1px; margin: -1px;}
+
+.article_warea {text-align: left;}
+.sp_tinfo, .inform_schtype .sel_deswrap a.sel_des_layer {display: inline-block; overflow: hidden; width: auto; height: 10px; background: url("../images/sp_mbcinfo.png") no-repeat; line-height: 999px; vertical-align: top;}
+.sct_tblarea {width: 990px; margin: 0 auto;}
+.sct_tbl, .sct_tbl th, .sct_tbl td {margin: 0; padding: 0; border: 0 none;}
+.sct_tbl {width: 100%; border: 2px solid #777; border-right: 0 none; border-left: 0 none; border-collapse: collapse; table-layout: fixed; border-spacing: 0;}
+.sct_tbl .w1 {width: 80px;}
+.sct_tbl .w2 {width: 182px;}
+.sct_tbl .w3 {width: 122px;}
+.sct_tbl th {padding: 11px 0; border-bottom: 1px solid #777; color: #333; text-align: center;}
+.sct_tbl tr:first-child td {border-top: 0 none;}
+.sct_tbl .on td {background: #f7f7f7;}
+.sct_tbl td {padding: 14px 0; border-top: 1px solid #ddd; line-height: 20px; vertical-align: middle; text-align: center; font-size: 14px; font-weight: bold;}
+.sct_tbl td a:hover {color: #0f50a5;}
+.sct_tbl td.td_tit {text-align: left;}
+.sct_tbl td.td_tit:first-child {padding-left: 13px;}
+.sct_tbl td.type {font-size: 0; line-height: 0;}
+.sct_tbl td.date {font-size: 12px; color: #767676;}
+.sct_tbl td.pic {padding: 14px 0;}
