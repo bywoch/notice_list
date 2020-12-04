@@ -105,3 +105,24 @@ button span {position: relative;}
 .photo_wrap {border: 2px solid #777; border-left: 0 none; border-right: 0 none;}
 .photo_article {/*width: 100%;*/ margin: 0 auto; width: 940px; padding: 20px 0; border-top: 1px solid #ddd;}
 .photo_article:first-child {border-top: 0 none;}
+
+.pa_list {width: auto; margin-left: -24px; zoom: 1;}
+.pa_list:after {display: block; clear: both; content: '';}
+.pa_list li {position:relative;float: left; width: 216px; margin-left: 24px; padding-bottom: 10px; font-size: 13px; color: #333; text-align: center; cursor: pointer;}
+.pa_list li .pic {display: inline-block;vertical-align: top;}
+.pa_list li .pic img {width: 216px;}
+.pa_list li.type2 .pic img {width: 216px; height: 324px;}
+.pa_list li.type3 .pic img {width: 216px; height: 216px;}
+.pa_list li.type4 .pic {width: 216px; height: 144px; background: #f8f8f8;}
+.pa_list li.type4 .pic img {width: 95px; height: 144px;}
+.pa_list li.type5 .pic {width: 216px; height: 324px; background: #f8f8f8;}
+.pa_list li.type5 .pic img {width: 216px; height: 144px; margin: 90px 0;}
+.pa_list li .pic:hover .cc_ellip_in {color: #0f50a5; text-decoration: underline;}
+.pa_list li a {color: #333;}
+.pa_list li .txt {display: block;margin: 5px 0 3px;text-align: left;line-height: 1.5;}
+.pa_list li .date {display: block;text-align:right;}
+.pa_list li .download {display: block;height: 30px;text-align:right;}
+.pa_list li .download button{position:absolute;right:0;bottom: 0;cursor: pointer;}
+.pa_list li .ico_new {position: absolute; left: 100%; top: 0; width: 21px; height: 5px; margin: 5px 0 0 5px; background-position: -68px 0;}
+.pa_list li .ico_new {width: 21px; height: 5px; margin: 0 0 5px 5px; background-position: -68px 0;}
+.pa_list.type2 .pic .cc_ellip_in, .pa_list.type2 .pic:hover .cc_ellip_in {color: #0f50a5; text-decoration: underline;}
