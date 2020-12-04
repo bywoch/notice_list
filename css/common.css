@@ -16,7 +16,7 @@ button span {position: relative;}
 .blind {position: absolute; overflow: hidden; clip: rect(0 0 0 0); width: 1px; height: 1px; margin: -1px;}
 
 .article_warea {text-align: left;}
-.sp_tinfo, .inform_schtype .sel_deswrap a.sel_des_layer {display: inline-block; overflow: hidden; width: auto; height: 10px; background: url("../images/sp_mbcinfo.png") no-repeat; line-height: 999px; vertical-align: top;}
+.sp_tinfo, .inform_schtype .sel_deswrap a.sel_des_layer {display: inline-block; overflow: hidden; width: auto; height: 10px; background: url("../images/sp_info.png") no-repeat; line-height: 999px; vertical-align: top;}
 .sct_tblarea {width: 990px; margin: 0 auto;}
 .sct_tbl, .sct_tbl th, .sct_tbl td {margin: 0; padding: 0; border: 0 none;}
 .sct_tbl {width: 100%; border: 2px solid #777; border-right: 0 none; border-left: 0 none; border-collapse: collapse; table-layout: fixed; border-spacing: 0;}
@@ -34,7 +34,7 @@ button span {position: relative;}
 .sct_tbl td.date {font-size: 12px; color: #767676;}
 .sct_tbl td.pic {padding: 14px 0;}
 
-.sct_tbl td .img_type {margin: 0 auto; vertical-align: middle; display: inline-block; position: relative; width: 120px; min-height: 80px; background: url("../images/ico_mbc.png") no-repeat 50% 50%;}
+.sct_tbl td .img_type {margin: 0 auto; vertical-align: middle; display: inline-block; position: relative; width: 120px; min-height: 80px; background: url("../images/ico_.png") no-repeat 50% 50%;}
 .sct_tbl td .img_type img {width: 120px; vertical-align: middle; min-height: 80px; background: #FFF;}
 .sct_tbl td .img_type .bor {display: inline-block; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid #000; opacity: .1; filter: alpha(opacity=10); vertical-align: middle;}
 .sct_tbl td .t_tit {font-size: 15px;color: #555;line-height: 1;vertical-align: top;}
@@ -42,7 +42,7 @@ button span {position: relative;}
 .sct_tbl td .t_txt {margin-top: 7px; font-size: 15px; color: #767676;}
 .sct_tbl td .ico_new {width: 21px; height: 5px; margin: 0 0 0 5px; background-position: -68px 0;}
 
-.article_warea .page a, .page span {display: inline-block; /* width: 28px; */ min-width: 12px; padding: 0 7px; height: 28px; border: 1px solid #fff; font-size: 14px; font-weight: 600; line-height: 28px; vertical-align: top;}
+.article_warea .page a, .page span {display: inline-block; min-width: 12px; padding: 0 7px; height: 28px; border: 1px solid #fff; font-size: 14px; font-weight: 600; line-height: 28px; vertical-align: top;}
 .article_warea .page a {cursor: pointer;}
 .article_warea .page a:hover {color: #777;}
 .article_warea .page .current {margin: 0 4px; border-color: #777; background-color: #777; color: #fff;}
@@ -103,7 +103,7 @@ button span {position: relative;}
 .view_btnarea:after {display: block; clear: both; content: '';}
 .view_rbtn {display: inline; float: right;}
 .photo_wrap {border: 2px solid #777; border-left: 0 none; border-right: 0 none;}
-.photo_article {/*width: 100%;*/ margin: 0 auto; width: 940px; padding: 20px 0; border-top: 1px solid #ddd;}
+.photo_article {margin: 0 auto; width: 940px; padding: 20px 0; border-top: 1px solid #ddd;}
 .photo_article:first-child {border-top: 0 none;}
 
 .pa_list {width: auto; margin-left: -24px; zoom: 1;}
@@ -123,6 +123,6 @@ button span {position: relative;}
 .pa_list li .date {display: block;text-align:right;}
 .pa_list li .download {display: block;height: 30px;text-align:right;}
 .pa_list li .download button{position:absolute;right:0;bottom: 0;cursor: pointer;}
-.pa_list li .ico_new {position: absolute; left: 100%; top: 0; width: 21px; height: 5px; margin: 5px 0 0 5px; background-position: -68px 0;}
+/*.pa_list li .ico_new {position: absolute; left: 100%; top: 0; width: 21px; height: 5px; margin: 5px 0 0 5px; background-position: -68px 0;}*/
 .pa_list li .ico_new {width: 21px; height: 5px; margin: 0 0 5px 5px; background-position: -68px 0;}
 .pa_list.type2 .pic .cc_ellip_in, .pa_list.type2 .pic:hover .cc_ellip_in {color: #0f50a5; text-decoration: underline;}
