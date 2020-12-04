@@ -73,3 +73,26 @@ button span {position: relative;}
 .view_img li .img_w {display: inline-block; position: relative; vertical-align: top;}
 .view_img li .img_w .ico_oview {position: absolute; right: 3px; bottom: 3px; width: 24px; height: 23px; background-position: -16px -94px;}
 .view_txt {font-size: 15px;line-height: 1.4 !important;color: #555;}
+
+.oth_page {width: auto; border: 1px solid #ddd; border-left: 0 none; border-right: 0 none; zoom: 1;}
+.oth_page:after {display: block; clear: both; content: '';}
+.oth_page li {float: left; width: 50%; font-size: 13px; text-align: right;}
+.oth_page li .box {position: relative; padding: 20px 50px 20px 10px; color: #767676;}
+.oth_page li .box a {color: #767676;}
+.oth_page li .box a.page_btn {font-size: 0;}
+.oth_page li .box a:hover {text-decoration: underline; color: #0f50a5;}
+.oth_page li .page_btn {position: absolute; top: 14px; right: 10px; width: 28px; height: 28px; border: 1px solid #ededed; text-align: center;}
+.oth_page li .page_btn:hover {background-color: #0c4da1;}
+.oth_page li .page_btn .sp_tinfo {width: 4px; height: 7px; margin-top: 11px;}
+.oth_page li .page_prev .sp_tinfo {background-position: -100px 0;}
+.oth_page li .page_prev:hover .sp_tinfo {background-position: -100px -8px;}
+.oth_page li .page_next .sp_tinfo {background-position: -110px 0;}
+.oth_page li .page_next:hover .sp_tinfo {background-position: -110px -8px;}
+.oth_page li .bor {display: inline-block; overflow: hidden; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: #ddd; line-height: 999px; vertical-align: top;}
+.oth_page li .box_in {display: block; position: relative; vertical-align: top;}
+.oth_page li .box_in.ico_y {padding-left: 63px;}
+.oth_page li .pn_type {position: absolute; right: 100%; top: 0; margin-right: 10px;}
+.oth_page li:first-child {text-align: left;}
+.oth_page li:first-child .box {padding: 20px 10px 20px 50px;}
+.oth_page li:first-child .box .page_btn {right: auto; left: 10px;}
+.oth_page li:first-child .box .bor {display: none;}
