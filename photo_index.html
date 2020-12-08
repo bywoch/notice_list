@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/common.js"></script>
+    <title>Notice List</title>
+</head>
+
+<body>
+    <div id="wrap" class="main">
+        <div id="header">
+        </div>
+        <div id="container" class="sub">
+            <section class="sub-intro pr">
+                <div class="wrapper">
+                    <div class="sub-top">
+                        <h2 class="tit">알림</h2>
+                        <h3 class="tit-s">공지사항</h3>
+                    </div>
+
+                    <!-- ※ Content Area Start ※ -->
+                    <div class="cont notice oth_cmm">
+                        <div class="tabs">
+                            <ul>
+                                <li class="on"><a href="index.html">공지사항</a></li>
+                                <li><a href="//with.mbc.co.kr/pr/press/index.html">보도자료</a></li>
+                                <li><a href="//with.mbc.co.kr/pr/photo/index.html">사진</a></li>
+                            </ul>
+                        </div>
+                        <div class="article_warea qi_area ui2">
+                            <!-- 게시판 시작-->
+                            <div class="sct_tblarea">
+                                <table cellspacing="0" class="sct_tbl">
+                                    <caption>
+                                        <strong>공지사항 목록</strong><!-- 표의 제목 -->
+                                        <p>번호, 제목, 등록일의 정보를 제공</p><!-- 표의 요약정보 -->
+                                    </caption>
+
+                                    <colgroup>
+                                        <col width="80px">
+                                        <col width="*">
+                                        <col width="122px">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">제목</th>
+                                            <th scope="col">등록일</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="page"></div>
+                            <!-- 게시판 끝-->
+                            <div class="wrap-search">
+                                <label for="opt" class="blind">검색 구분</label>
+                                <select name="opt" id="opt">
+                                    <option value="1">제목</option>
+                                    <option value="2">내용</option>
+                                </select>
+                                <label for="keyword" class="blind">검색어 입력</label>
+                                <input name="keyword" id="keyword" type="text">
+                                <button type="button" id="btnSearch" name="btnSearch">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ※ Content Area End ※ -->
+                </div>
+            </section>
+        </div>
+        <footer id="footer">
+        </footer>
+    </div>
+</body>
+
+</html>
