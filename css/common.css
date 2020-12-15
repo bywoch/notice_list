@@ -119,3 +119,29 @@ button span {position: relative;}
 .pa_list li .download button {position: absolute; right: 0; bottom: 0; cursor: pointer;}
 .pa_list li .ico_new {width: 21px; height: 5px; margin: 0 0 5px 5px; background-position: -68px 0;}
 .pa_list.type2 .pic .cc_ellip_in, .pa_list.type2 .pic:hover .cc_ellip_in {color: #0f50a5; text-decoration: underline;}
+
+/*photo viewer*/
+.photoview_abs {display: none; position: absolute; width: 1200px; left: 50%; margin-left: -600px; z-index: 100;}
+.photoview_wrap {position: relative; width: 100%; background: #000000;}
+.pview_tit {padding: 20px; font-size: 22px; color: #ffffff; letter-spacing: -.05em; background: #252931;}
+.dimmed_on .photoview_abs {display: block;}
+.photoloading {margin-top: 0; position: absolute; height: 550px; width: 980px; line-height: 400px; text-align: center; z-index: 100; background: #fff; top: 61px; left: 50%; margin-left: -490px;}
+.gallery_wrap {/* margin-top:30px */;}
+.gallery_view {position: relative; height: 550px; /* padding-bottom:40px; */ line-height: 400px; text-align: center;}
+.gallery_view img {height: 550px;}
+.gallery_view .img_url {display: inline-block; position: relative; line-height: 0; vertical-align: middle;}
+.gallery_view .img_url .iu_bx {margin: 0 auto; overflow: hidden; width: 840px;}
+.gallery_view .img_url img {vertical-align: top;}
+.gallery_view .img_down {display: inline-block; position: absolute; right: -2px; top: 0; width: 64px; height: 65px; cursor: pointer; background: url("../images/ico-download.png") no-repeat;}
+.gallery_view .img_down:hover {text-decoration: none;}
+.gallery_view .img_down .tx {display: inline-block; vertical-align: top;}
+.gallery_view .img_down .btn_down {width: 19px; height: 16px; margin: 12px -4px 0 7px; /* background-position:-108px -30px; */ background: url("../images/ico-save.png") no-repeat; display: none;}
+.gallery_view .img_num {display: block; width: 100%; position: absolute; left: 0; bottom: -2px; right: 0; margin-bottom: -30px; font-size: 13px; line-height: 20px; color: #b7b7b7; z-index: 10;}
+.gallery_view .img_num .current {color: #b7b7b7;}
+.gallery_view .vm_line {display: inline-block; overflow: hidden; width: 0; height: 100%; line-height: 400px; vertical-align: middle; line-height: 999px;}
+.gallery_view .imgcon div {display: inline-block; position: absolute; top: 0; bottom: 0; width: 88px; cursor: pointer;}
+.gallery_view .imgcon .sp_gallery {margin-top: 260px;}
+.gallery_view .imgcon .prev {left: 0;}
+.gallery_view .imgcon .prev .sp_gallery {width: 18px; height: 35px; /* background-position:0 0; */ background: url("../images/view-left.png") no-repeat; font-size: 0;}
+.gallery_view .imgcon .next {right: 0;}
+.gallery_view .imgcon .next .sp_gallery {width: 18px; height: 35px; /* background-position:-50px 0 */ background: url("../images/view-right.png") no-repeat; font-size: 0;}
