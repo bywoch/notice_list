@@ -117,5 +117,59 @@
 			}
 		});
 	},
+	PressList: function () {
+		var _this = this;
+		var _that = infoUI;
+		_this.Location = "Press";
+
+		$.ajax({
+			//type: "get",
+			url: "//zzzzinfo.com/api/press/list",
+			dataType: "jsonp",
+			async: true,
+			cache: true,
+			data: {
+				opt: _this.Opt,
+				keyword: _this.Keyword,
+				page: _this.Page,
+				size: _this.Size
+			},
+			success: function (o) {
+				_this.InitPageInfo(o);
+				_that.PressList(o.list);
+			},
+			error: function (request, status, error) {
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	},
+	PressInfo: function () {
+		var _this = this;
+		var _that = infoUI;
+		var n = _this.UrlParameter("idx");
+		var _keyword = infoUtil.UrlParameter("keyword");
+		var _opt = infoUtil.UrlParameter("opt");
+		if (_opt != "") { infoUtil.Opt = _opt; }
+		if (_keyword != "") { infoUtil.Keyword = _keyword; }
+		_this.Location = "Notice";
+		_this.Page = _this.UrlParameter("page");
+
+		$.ajax({
+			//type: "get",
+			url: "//zzzzinfo.com/api/press/info",
+			dataType: "jsonp",
+			async: true,
+			cache: true,
+			data: {
+				intIdx: n
+			},
+			success: function (o) {
+				_that.PressInfo(o);
+			},
+			error: function (request, status, error) {
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	},
 }
 
