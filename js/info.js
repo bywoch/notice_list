@@ -171,5 +171,32 @@
 			}
 		});
 	},
+	PhotoList: function () {
+		var _this = this;
+		var _that = infoUI;
+		_this.Location = "Photo";
+		_this.Size = 12;
+
+		$.ajax({
+			//type: "get",
+			url: "//zzzzinfo.com/api/photo/list",
+			dataType: "jsonp",
+			async: true,
+			cache: true,
+			data: {
+				opt: _this.Opt,
+				keyword: _this.Keyword,
+				page: _this.Page,
+				size: _this.Size
+			},
+			success: function (o) {
+				_this.InitPageInfo(o);
+				_that.PhotoList(o.list);
+			},
+			error: function (request, status, error) {
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	},
 }
 

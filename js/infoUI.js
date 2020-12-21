@@ -123,4 +123,48 @@
         $(".view_img").html(azHtml.join(''));
         _this.SetViewer();
     },
+    PhotoList: function (o) {
+        var azHtml = [];
+        var _this = this;
+        var _that = infoUtil;
+        var k = 4;
+        var title = "";
+        var _idxCnt = -1;
+        for (var i = 0; i < o.length; i++) {
+            if (_that.Idx == o[i].code) {
+                _idxCnt = i;
+            }
+
+            if (i % k == 0) {
+                azHtml.push('<div class="photo_article">');
+                azHtml.push('<ul class="pa_list">');
+            }
+            azHtml.push('<li class="new">');
+            if (o[i].photo_fullpath == "") {
+                azHtml.push('<a class="pic" href="#"></a>');
+            } else {
+                azHtml.push('<a class="pic" href="#"><img alt="' + o[i].title + '" src="' + _that.ImageServer + o[i].photo_fullpath + '"><span class="blind">' + i + '|' + o[i].code + '</span></a>');
+            }
+            azHtml.push('<span class="txt"><span class="cc_ellip" style="min-height: 38px;">' + o[i].title.cut(60) + '</span></span>')
+            azHtml.push('<span style="text-align: right; font-size:11px; margin-top: -18px; margin-right: 7px; display: block; position: relative;">' + o[i].reg_dt_short.substring(2, 10) + '</span>')
+            if (o[i].is_new) {
+                azHtml.push('<span class="sp_tinfo ico_new">new</span>');
+            }
+            azHtml.push('</span></span>');
+            azHtml.push('	</li>');
+
+            if (i % k == k - 1) {
+                azHtml.push('</ul>');
+                azHtml.push('</div>');
+            }
+
+        }
+        $(".photo_wrap").html(azHtml.join(''));
+        _this.SetPager();
+        _this.SetViewer();
+
+        if (_idxCnt >= 0) {
+            $(".photo_wrap").find("li").eq(_idxCnt).find("a").click();
+        }
+    },
 }
