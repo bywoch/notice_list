@@ -198,5 +198,59 @@
 			}
 		});
 	},
+	NewsLetterList: function () {
+		var _this = this;
+		var _that = infoUI;
+		_this.Location = "NewsLetter";
+
+		$.ajax({
+			//type: "get",
+			url: "//zzzzinfo.com/api/newsletter/list",
+			dataType: "jsonp",
+			async: true,
+			cache: true,
+			data: {
+				opt: _this.Opt,
+				keyword: _this.Keyword,
+				page: _this.Page,
+				size: _this.Size
+			},
+			success: function (o) {
+				_this.InitPageInfo(o);
+				_that.NewsLetterList(o.list);
+			},
+			error: function (request, status, error) {
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	},
+	NewsLetterInfo: function () {
+		var _this = this;
+		var _that = infoUI;
+		var n = (_this.UrlParameter("idx") == "" ? 0 : _this.UrlParameter("idx"));
+		var _keyword = infoUtil.UrlParameter("keyword");
+		var _opt = infoUtil.UrlParameter("opt");
+		if (_opt != "") { infoUtil.Opt = _opt; }
+		if (_keyword != "") { infoUtil.Keyword = _keyword; }
+		_this.Location = "NewsLetter";
+		_this.Page = _this.UrlParameter("page");
+
+		$.ajax({
+			//type: "get",
+			url: "//zzzzinfo.com/api/newsletter/info",
+			dataType: "jsonp",
+			async: true,
+			cache: true,
+			data: {
+				intIdx: n = "" ? 0 : n
+			},
+			success: function (o) {
+				_that.NewsLetterInfo(o);
+			},
+			error: function (request, status, error) {
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	},
 }
 
