@@ -167,4 +167,169 @@
             $(".photo_wrap").find("li").eq(_idxCnt).find("a").click();
         }
     },
+    NewsLetterInfo: function (p) {
+        var azHtml = [];
+        var _this = this;
+        var _that = infoUtil;
+        o = p.info;
+        f = p.file;
+
+        $(".vtl_tit").html('<strong>' + o.info.title + '</strong>');
+        $(".view_txt").html(o.info.contents);
+        $(".vtl_date").html(o.info.reg_dt_full);
+        if (o.prev.code === null) {
+            $(".cc_ellip_in").first().html('이전 뉴스레터가 없습니다');
+        } else {
+            $(".page_prev").attr("href", _that.PageNewsLetterView + o.prev.code);
+            $(".cc_ellip_in").first().html('<a href="' + _that.PageNewsLetterView + o.prev.code + '&page=' + _that.Page + '">' + o.prev.title + '</a>');
+        }
+        if (o.next.code === null) {
+            $(".cc_ellip_in").last().html('다음 뉴스레터가 없습니다');
+        } else {
+            $(".page_next").attr("href", _that.PageNewsLetterView + o.next.code);
+            $(".cc_ellip_in").last().html('<a href="' + _that.PageNewsLetterView + o.next.code + '&page=' + _that.Page + '">' + o.next.title + '</a>');
+        }
+        $(".v_btn").attr("href", _that.PageNewsLetter + _that.Page + '&opt=' + _that.Opt + '&keyword=' + encodeURIComponent(_that.Keyword));
+        /*
+        var azHtml = [];
+        for(var i=0; i<f.length; i++){
+        	if (f[i].iskind != "D"){
+        		azHtml.push('<li><a href="#" class="img_w"><img alt="" src="'+_that.ImageServer+ f[i].file_fullpath+'"><span class="blind">'+i+'|'+o.info.code+'</span></a>');
+        	}	
+        }			
+        $(".view_img").html(azHtml.join(''));		
+        _this.SetViewer();
+        */
+    },
+    NewsLetterList: function (o) {
+        var azHtml = [];
+        var _this = this;
+        var _that = infoUtil;
+        if (o.length > 0) {
+            for (var i = 0; i < o.length; i++) {
+                azHtml.push('<tr>');
+                azHtml.push('<td>' + (_that.Num--) + '</td>');
+                azHtml.push('<td class="pic">');
+                azHtml.push('<div class="in">');
+                if (o[i].photo_fullpath == "") {
+                    azHtml.push('<span class="img_type"><span class="bor">&nbsp;</span></span>');
+                } else {
+                    azHtml.push('<span class="img_type"><img src="' + _that.ImageServer + o[i].photo_fullpath + '" alt="' + o[i].title.cut(30) + ' 이미지"><span class="bor">&nbsp;</span></span>');
+                }
+                azHtml.push('</div>');
+                azHtml.push('</td>');
+                azHtml.push('<td class="td_tit">');
+                azHtml.push('<div class="in">');
+                azHtml.push('<div class="t_tit"><a id="" href="' + _that.PageNewsLetterView + o[i].code + '&page=' + _that.Page + '&opt=' + _that.Opt + '&keyword=' + encodeURIComponent(_that.Keyword) + '"><strong>' + o[i].title + '</strong></a>');
+                if (o[i].is_new) {
+                    azHtml.push('<span class="sp_tinfo ico_new">new</span>');
+                }
+                azHtml.push('</div>');
+                azHtml.push('</div>');
+                azHtml.push('</td>');
+                azHtml.push('<td class="date">');
+                azHtml.push('<div class="in">' + o[i].reg_dt_short);
+                azHtml.push('</div>');
+                azHtml.push('</td>');
+                azHtml.push('</tr>');
+            }
+        } else {
+            azHtml.push('<tr><td colspan="4"><div class="in"><div class="t_tit"><strong>검색된 결과가 없습니다.</strong></div></div></td></tr>');
+        }
+        $(".sct_tblarea").find("tbody").html(azHtml.join(''));
+        _this.SetPager();
+    },
+    SetViewer: function () {
+        $('.view_img,.mphoto_list,.pa_list').children().find('a:first').bind('click', function () {
+            $('html, body').stop().animate({
+                scrollTop: 480
+            });
+            $('.photoview_abs').show();
+            $('.photoview_abs').attr('tabIndex', -1);
+            $('.photoview_abs').focus();
+            $('#wrap').addClass('dimmed_on');
+            var a = $(this).find('span').first().text().split('|');
+            var n = a[0];
+            var c = a[1];
+            var d = ($("#hdnDataType").val() != "" ? $("#hdnDataType").val() : "view");
+
+            $('.gallery_wrap').hivegallery({
+                view_num: 10,
+                closefocus: n,
+                curr_idx: c,
+                category: $("#hdnCategory").val(),
+                data_type: d,
+                thumb_width: 85
+            });
+
+            return false;
+        });
+    },
+    SetPager: function () {
+        var _this = this;
+        var _that = infoUtil;
+        var azHtml = [];
+
+        if (_that.TotalPage == 1) {
+            azHtml.push('<a href="#none" data-page-num="1" class="current">1</a>');
+            $(".page").html(azHtml.join(''));
+            return;
+        }
+
+        if (_that.Page > _that.Size) {
+            azHtml.push('<a href="#none" data-page-num="1" class="btn_page btn_first"><span class="sp_tinfo">맨처음 페이지</span></a>');
+        }
+
+        if (_that.BlockPage > 1) {
+            azHtml.push('<a href="#none" data-page-num="' + (_that.BlockPage - 1) + '" class="btn_page btn_prev"><span class="sp_tinfo">이전 페이지</span></a>');
+        }
+        for (var i = _that.BlockPage; i < _that.BlockPage + _that.PageSize; i++) {
+            if (i != _that.Page) {
+                azHtml.push('<a href="#none" data-page-num="' + i + '">' + i + '</a>');
+            } else {
+                azHtml.push('<a href="#none" data-page-num="' + i + '" class="current">' + i + '</a>');
+            }
+            if (i >= _that.TotalPage) {
+                break;
+            }
+        }
+
+        if ((_that.BlockPage + _that.PageSize) <= _that.TotalPage) {
+            azHtml.push('<a href="#none" data-page-num="' + (_that.BlockPage + _that.PageSize) + '" class="btn_page btn_next"><span class="sp_tinfo">다음 페이지</span></a>');
+        }
+        if (_that.Page < _that.TotalPage) {
+            azHtml.push('<a href="#none" data-page-num="' + (_that.TotalPage) + '" class="btn_page btn_last"><span class="sp_tinfo">맨마지막 페이지</span></a>');
+        }
+
+
+        $(".page").html(azHtml.join(''));
+        $(".page a").bind("click", function () {
+            _this.ChangePage($(this).attr("data-page-num"));
+        });
+        $('.page a[href="#none"]').click(function (w) {
+            w.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: 0
+            });
+        });
+    },
+    ChangePage: function (p) {
+        var _this = this;
+        var _that = infoUtil;
+        _that.Page = p;
+        switch (_that.Location) {
+            case "Notice":
+                _that.NoticeList();
+                break;
+            case "Press":
+                _that.PressList();
+                break;
+            case "Photo":
+                _that.PhotoList();
+                break;
+            case "NewsLetter":
+                _that.NewsLetterList();
+                break;
+        }
+    }
 }
