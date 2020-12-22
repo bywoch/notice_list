@@ -23,7 +23,7 @@ $(function () {
     this.azDataBool = null;
     this.htInfo = null;
     this.azDataImageDesc = null;
-
+    
     var self = this;
 
     $.fn.hivegallery = function (options) {
@@ -223,5 +223,101 @@ $(function () {
 
     };
 
-})(jQuery);
+    //데이터 가져오기
+    $.hivegallery.ajaxData = function (settings, o) {
+        var p = (o == "now" ? settings.curr_idx : (o == "prev" ? settings.first_idx : settings.end_idx))
+        var azHtml = [];
+        $.getJSON("https://zzzzinfo.com/api/photo/viewer?viewtype=" + settings.data_type + "&viewoption=" + o + "&category=" + settings.category + "&ppcode=" + p + "&keyword=" + encodeURIComponent(infoUtil.Keyword) + "&callback=?", function (d) {
+            for (var i = 0; i < d.list.length; i++) {
+                self.azDataTitle[d.list[i].rownum] = d.list[i].title;
+                self.azDataImage[d.list[i].rownum] = d.list[i].photo_fullpath;
+                self.azDataImageDesc[d.list[i].rownum] = ($.trim(d.list[i].contents).length > 0 ? d.list[i].contents : d.list[i].title);
+                self.azDataIdx[d.list[i].rownum] = d.list[i].pp_code;
 
+                if (i == 0) {
+                    settings.min_idx = d.min_code;
+                    settings.max_idx = d.max_code;
+                    settings.total_cnt = d.total_cnt;
+                    settings.total_num = d.total_cnt;
+                    if (o == "now") { self.htInfo.nContentIndex = d.list[i].rownum; }
+                    if (o != "next") { self.htInfo.nContentLeftIndex = d.list[i].rownum; settings.first_idx = d.list[i].pp_code; }
+                }
+                if (o != "prev") {
+                    settings.end_idx = d.list[i].pp_code;
+                    self.htInfo.nContentRightIndex = d.list[i].rownum;
+                }
+                if (o == "now") {
+                    if (settings.data_type == "list") {
+                        if (d.list[i].pp_code == p) {
+                            self.htInfo.nCurrent = i;
+                        }
+
+                    }
+                    else {
+                        self.htInfo.nCurrent = parseInt(settings.closefocus, 10);
+                        settings.current = self.htInfo.nCurrent;
+                        settings.prev_current = self.htInfo.nCurrent;
+                        settings.prev = settings.prev_current;
+                    }
+                }
+                if (settings.data_type == "list") {
+                    azHtml.push('<li><a href="https://zzzzinfo.com/data/' + d.list[i].photo_fullpath + '" class="box"><span class="img_a"><img src="https://zzzzinfo.com/data/' + d.list[i].photo_fullpath + '" alt="' + ($.trim(d.list[i].contents).length > 0 ? d.list[i].contents : d.list[i].title) + '"></span><span class="tit">' + d.list[i].title + '</span><span class="blind">' + d.list[i].rownum + '</span></a></li>');
+                }
+                else {
+                    azHtml.push('<li><a href="https://zzzzinfo.com/data/' + d.list[i].photo_fullpath + '" class="box"><span class="img_a"><img src="https://zzzzinfo.com/data/' + d.list[i].photo_fullpath + '" alt="' + ($.trim(d.list[i].contents).length > 0 ? d.list[i].contents : d.list[i].title) + '"></span><span class="tit">&nbsp;</span><span class="blind">' + d.list[i].rownum + '</span></a></li>');
+                }
+                self.htInfo.nTotal++;
+                if (o == "prev") { settings.prev_cnt++; settings.current++; settings.prev_current++; htInfo.nCurrent++; }
+            }
+            if (o == "prev") {
+                settings.obj.prepend(azHtml.join(''));
+            }
+            else {
+                settings.obj.append(azHtml.join(''));
+            }
+            $.hivegallery.htmlData(settings, o);
+
+        });
+    }
+
+    //데이터 그리기
+    $.hivegallery.htmlData = function (settings, o) {
+        var numwidth = null;
+        settings.obj.children().each(function () {
+            numwidth += $(this).outerWidth(true);
+        });
+        settings.obj.css({
+            width: numwidth
+        });
+
+        if (o == "now") {
+            // 효과 세팅하기
+            settings.wrapbox.find('.total').text(settings.total_num);
+            // 처음 메뉴 보이는 위치
+            $.hivegallery.effect(settings.obj, settings, self.htInfo.nCurrent);
+            $.hivegallery.htmlPos(settings, self.htInfo.nCurrent);
+        }
+        if (o == "next") {
+            $.hivegallery.htmlPos(settings, settings.prev_current);
+        }
+
+    }
+
+    $.hivegallery.htmlPos = function (settings, pos) {
+        $(".photoloading").hide();
+
+        var r = settings.obj.children().eq(pos).find('.blind').text();
+        settings.obj.children().removeClass(settings.select_class);
+        settings.obj.children().eq(pos).addClass(settings.select_class);
+        settings.gallery_view.find('img').attr('src', settings.obj.children().eq(pos).find('a').attr('href'));
+
+        settings.gallery_view.find('img').attr('alt', settings.obj.children().eq(pos).find('a').find('img').attr('alt'));
+        settings.gallery_view.find('a').attr('href', "https://zzzzinfo.com/api/download?file=" + settings.obj.children().eq(pos).find('a').attr('href').replace("https://zzzzinfo.com/data/", "").replace("/data/", ""));
+        settings.gallery_view.parent().parent().find('strong').html(settings.obj.children().eq(pos).find('img').attr('alt'));
+        settings.gallery_view.find('strong').html(settings.obj.children().eq(pos).find('a').find('img').attr('alt'));
+        settings.wrapbox.find('.current').text(r);
+
+        nLoggerFn(settings.gallery_view.find('a').attr('href'));
+    }
+
+})(jQuery);
