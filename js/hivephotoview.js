@@ -23,7 +23,7 @@ $(function () {
     this.azDataBool = null;
     this.htInfo = null;
     this.azDataImageDesc = null;
-    
+
     var self = this;
 
     $.fn.hivegallery = function (options) {
@@ -319,5 +319,40 @@ $(function () {
 
         nLoggerFn(settings.gallery_view.find('a').attr('href'));
     }
+
+    // 이전배너 보이기 함수
+    $.hivegallery.prev = function (elements, settings, current, cnt) {
+        current = settings.current - cnt; // 이동할 다음 배너 인덱스 값 구하기.
+        // 다음 내용이 없는 경우, 첫 번째 배너 인덱스 값으로 설정하기.
+        if (current < 0) {
+            current = 0;
+        };
+        $.hivegallery.effect(elements, settings, current); // n번째 배너 보이기.
+        if (settings.max_idx != settings.first_idx) {
+            if (current < settings.view_num) {
+                $.hivegallery.ajaxData(settings, "prev");
+                return;
+            }
+        }
+        $.hivegallery.htmlPos(settings, current);
+    };
+
+    // 다음배너 보이기 함수
+    $.hivegallery.next = function (elements, settings, current, cnt) {
+        current = settings.current + cnt; // 이동할 다음 배너 인덱스 값 구하기.
+        // 다음 내용이 없는 경우, 첫 번째 배너 인덱스 값으로 설정하기.
+        if (current > htInfo.nTotal || current >= settings.total_cnt) {
+            return;
+        };
+
+        $.hivegallery.effect(elements, settings, current); // n번째 배너 보이기.
+        if (settings.min_idx != settings.end_idx && htInfo.nTotal < settings.total_cnt) {
+            if (htInfo.nTotal - current < settings.view_num) {
+                $.hivegallery.ajaxData(settings, "next");
+                return;
+            }
+        }
+        $.hivegallery.htmlPos(settings, current);
+    };
 
 })(jQuery);
