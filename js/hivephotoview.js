@@ -355,4 +355,37 @@ $(function () {
         $.hivegallery.htmlPos(settings, current);
     };
 
+    // current에 해당하는 배너 보이기.
+    $.hivegallery.effect = function (elements, settings, current) {
+        if (settings.total_num < settings.view_num) {
+            settings.current = current;
+            settings.prev_current = current;
+            return;
+        }
+        if (current != settings.current) {
+            if (settings.type == 'default') {
+                elements.eq(settings.prev_current).hide();
+                elements.eq(current).show();
+                // 배너 메뉴의 위치 값을 업데이트 시킴.
+                $.hivegallery.dots(settings, current, settings.prev_current);
+                settings.prev_current = current;
+            } else if (settings.type == 'fade') {
+                elements.eq(settings.prev_current).fadeOut(settings.speed);
+                elements.eq(current).fadeIn(settings.speed, function () {
+                    removeFilter($(this)[0]);
+                });
+                // 배너 메뉴의 위치 값을 업데이트 시킴.
+                $.hivegallery.dots(settings, current, settings.prev_current);
+                settings.prev_current = current;
+            } else if (settings.type == 'slide') {
+                elements.animate({
+                    marginLeft: -(current * settings.thumb_width)
+                });
+                settings.prev_current = current;
+            };
+            //현재 배너 인덱스 업데이트 시키기.
+            settings.current = current;
+        };
+    };
+
 })(jQuery);
