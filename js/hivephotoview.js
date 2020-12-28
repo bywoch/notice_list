@@ -389,3 +389,14 @@ $(function () {
     };
 
 })(jQuery);
+
+// **** remove Opacity-Filter in ie ****
+function removeFilter(element) {
+    if (element.style.removeAttribute) {
+        element.style.removeAttribute('filter');
+    };
+}
+
+function nLoggerFn(src) {
+    nLogger.event('click', { _u_depth1: "https:" + src });
+}
