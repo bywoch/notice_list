@@ -49,13 +49,13 @@
                 <div class="pview_tit"><strong>포토뷰어보기</strong></div>
                 <div class="photoloading">
                     <!--새로 적용-->
-                    <img src="//mbcinfo.imbc.com/img/loading_b.gif" alt="이미지 로딩중" style="padding-bottom: 90px;">
+                    <img src="https://zzzzinfo.com/img/loading_b.gif" alt="이미지 로딩중" style="padding-bottom: 90px;">
                 </div>
                 <div class="gallery_wrap">
                     <div class="gallery_view">
                         <span class="img_url">
-                            <img src="//mbcinfo.imbc.com/img/blank.gif" alt="">
-                            <a href="//mbcinfo.imbc.com/img/img_pview2.jpg" class="img_down" target="iframeHidden"><span
+                            <img src="https://zzzzinfo.com/img/blank.gif" alt="">
+                            <a href="https://zzzzinfo.com/img/img_pview2.jpg" class="img_down" target="iframeHidden"><span
                                     class="sp_tinfo btn_down blind">다운받기</span></a>
                             <span class="img_num"><span class="current"></span>&nbsp;/&nbsp;<span
                                     class="total"></span></span>
@@ -81,12 +81,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="pview_dang">* MBC의 사전 동의 없이 무단전재 및 게재를 할 수 없습니다.</div>
+                <div class="pview_dang">* 사전 동의 없이 무단전재 및 게재를 할 수 없습니다.</div>
                 <p class="pview_close"><a href="#"><span class="sp_gallery">레이어 닫기</span></a></p>
             </div>
         </div>
         <div class="dimmed">&nbsp;</div>
         <iframe width="0" height="0" src="about:blank" id="iframeHidden" name="iframeHidden" title="빈영역"></iframe>
+        <script>
+            var _page = infoUtil.UrlParameter("page");
+            var _idx = infoUtil.UrlParameter("idx");
+            if (_page != "") {
+                infoUtil.Page = _page;
+            }
+            if (_idx != "") {
+                infoUtil.Idx = _idx;
+            }
+    
+            infoUtil.InitPage();
+            infoUtil.PhotoList();
+    
+        </script>
+        <script src="js/hivephotoview.js"></script>
         <!-- 포토뷰어 끝 -->
         <footer id="footer">
         </footer>
