@@ -72,7 +72,7 @@
 		
 		// 현재 페이지 그룹의 시작 페이지 번호를 계산하여 BlockPage 속성에 저장
 		// 현재 페이지에서 PageSize를 나눈 뒤 다시 PageSize를 곱하여 현재 페이지 그룹의 시작 페이지 번호를 구함
-		// parseInt() 함수를 사용하여 소수점을 버리고 정수로 변환합니다.
+		// parseInt() 함수를 사용하여 소수점을 버리고 정수로 변환
 		_this.BlockPage = parseInt(parseInt(_this.Page - 1) / _this.PageSize) * _this.PageSize + 1;
 		
 		// 현재 페이지에서 보여지는 데이터의 번호를 계산하여 Num 속성에 저장
@@ -85,54 +85,110 @@
 
 	},
 	NoticeList: function () {
-		var _this = this;
-		var _that = infoUI;
-		_this.Location = "Notice";
+		var _this = this; // 함수 내에서 this를 사용하기 위해 _this 변수에 현재 객체(this)를 할당
+		var _that = infoUI; // infoUI 객체를 _that 변수에 할당
+	
+		_this.Location = "Notice"; // 현재 위치(Location)을 "Notice"로 설정
+	
+		// 공지사항 리스트를 가져오기 위해 AJAX 요청
 		$.ajax({
-			//type: "get",
-			url: "//zzzzinfo.com/api/notice/list",
+			// 주석 처리된 type: "get"은 생략해도 기본 값이 get으로 설정
+	
+			// 공지사항 리스트를 가져올 URL을 설정
+			url: "https://zzzzinfo.com/api/notice/list",
+	
+			// 서버에서 반환하는 데이터 타입을 설정
+			// JSONP 방식으로 데이터를 받아오기 위해 "jsonp"로 설정
 			dataType: "jsonp",
+	
+			// 요청을 비동기적으로 처리하도록 설정
 			async: true,
+	
+			// 요청 결과를 캐시할 수 있도록 설정
 			cache: true,
+	
+			// 요청 시 서버에 전달할 데이터를 설정
+			// _this 객체의 Opt, Keyword, Page, Size 속성 값을 사용하여 데이터를 설정
 			data: {
 				opt: _this.Opt,
 				keyword: _this.Keyword,
 				page: _this.Page,
 				size: _this.Size
 			},
+	
+			// 요청이 성공적으로 완료되었을 때 실행되는 콜백 함수
 			success: function (o) {
+				// InitPageInfo 함수를 호출하여 페이지 정보를 초기화
+				// 가져온 공지사항 리스트를 infoUI 객체의 NoticeList 함수에 전달하여 페이지에 표시
 				_this.InitPageInfo(o);
 				_that.NoticeList(o.list);
 			},
+	
+			// 요청이 실패했을 때 실행되는 콜백 함수
 			error: function (request, status, error) {
-				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				// 에러가 발생한 경우, 필요한 처리를 수행하거나 에러 메시지를 출력하는 등의 작업을 수행할 수 있음
+				// 현재 코드에서는 에러 메시지를 주석 처리하여 아무 동작도 수행하지 않음
 			}
 		});
 	},
 	NoticeInfo: function () {
-		var _this = this;
-		var _that = infoUI;
+		var _this = this; // 함수 내에서 this를 사용하기 위해 _this 변수에 현재 객체(this)를 할당합니다.
+		var _that = infoUI; // infoUI 객체를 _that 변수에 할당합니다.
+	
+		// URL에서 "idx" 파라미터를 가져와서 n 변수에 저장합니다.
 		var n = _this.UrlParameter("idx");
+	
+		// URL에서 "keyword" 파라미터와 "opt" 파라미터를 가져와서 _keyword, _opt 변수에 저장합니다.
 		var _keyword = infoUtil.UrlParameter("keyword");
 		var _opt = infoUtil.UrlParameter("opt");
+	
+		// _opt 변수에 값이 있는 경우 (URL에 "opt" 파라미터가 존재하는 경우)
+		// infoUtil 객체의 Opt 속성에 _opt 값을 설정합니다.
 		if (_opt != "") { infoUtil.Opt = _opt; }
+	
+		// _keyword 변수에 값이 있는 경우 (URL에 "keyword" 파라미터가 존재하는 경우)
+		// infoUtil 객체의 Keyword 속성에 _keyword 값을 설정합니다.
 		if (_keyword != "") { infoUtil.Keyword = _keyword; }
+	
+		// 현재 위치(Location)을 "Notice"로 설정합니다.
 		_this.Location = "Notice";
+	
+		// URL에서 "page" 파라미터를 가져와서 _this 객체의 Page 속성에 설정합니다.
 		_this.Page = _this.UrlParameter("page");
+	
+		// AJAX 요청을 보내서 특정 공지사항의 상세 정보를 가져옵니다.
 		$.ajax({
-			//type: "get",
-			url: "//zzzzinfo.com/api/notice/info",
+			// 주석 처리된 type: "get"은 생략해도 기본 값이 get으로 설정되어 있습니다.
+	
+			// 특정 공지사항의 상세 정보를 가져올 URL을 설정합니다.
+			url: "https://zzzzinfo.com/api/notice/info",
+	
+			// 서버에서 반환하는 데이터 타입을 설정합니다.
+			// JSONP 방식으로 데이터를 받아오기 위해 "jsonp"로 설정합니다.
 			dataType: "jsonp",
+	
+			// 요청을 비동기적으로 처리하도록 설정합니다.
 			async: true,
+	
+			// 요청 결과를 캐시할 수 있도록 설정합니다.
 			cache: true,
+	
+			// 요청 시 서버에 전달할 데이터를 설정합니다.
+			// n 변수에 저장된 특정 공지사항의 ID를 intIdx 파라미터로 넘겨서 서버에 전달합니다.
 			data: {
 				intIdx: n
 			},
+	
+			// 요청이 성공적으로 완료되었을 때 실행되는 콜백 함수입니다.
 			success: function (o) {
+				// 가져온 공지사항의 상세 정보를 infoUI 객체의 NoticeInfo 함수에 전달하여 페이지에 표시합니다.
 				_that.NoticeInfo(o);
 			},
+	
+			// 요청이 실패했을 때 실행되는 콜백 함수입니다.
 			error: function (request, status, error) {
-				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				// 에러가 발생한 경우, 필요한 처리를 수행하거나 에러 메시지를 출력하는 등의 작업을 수행할 수 있습니다.
+				// 현재 코드에서는 에러 처리가 주석 처리되어 있습니다.
 			}
 		});
 	},
@@ -143,7 +199,7 @@
 
 		$.ajax({
 			//type: "get",
-			url: "//zzzzinfo.com/api/press/list",
+			url: "https://zzzzinfo.com/api/press/list",
 			dataType: "jsonp",
 			async: true,
 			cache: true,
@@ -175,7 +231,7 @@
 
 		$.ajax({
 			//type: "get",
-			url: "//zzzzinfo.com/api/press/info",
+			url: "https://zzzzinfo.com/api/press/info",
 			dataType: "jsonp",
 			async: true,
 			cache: true,
@@ -198,7 +254,7 @@
 
 		$.ajax({
 			//type: "get",
-			url: "//zzzzinfo.com/api/photo/list",
+			url: "https://zzzzinfo.com/api/photo/list",
 			dataType: "jsonp",
 			async: true,
 			cache: true,
@@ -224,7 +280,7 @@
 
 		$.ajax({
 			//type: "get",
-			url: "//zzzzinfo.com/api/newsletter/list",
+			url: "https://zzzzinfo.com/api/newsletter/list",
 			dataType: "jsonp",
 			async: true,
 			cache: true,
@@ -256,7 +312,7 @@
 
 		$.ajax({
 			//type: "get",
-			url: "//zzzzinfo.com/api/newsletter/info",
+			url: "https://zzzzinfo.com/api/newsletter/info",
 			dataType: "jsonp",
 			async: true,
 			cache: true,
