@@ -132,63 +132,29 @@
 		});
 	},
 	NoticeInfo: function () {
-		var _this = this; // 함수 내에서 this를 사용하기 위해 _this 변수에 현재 객체(this)를 할당합니다.
-		var _that = infoUI; // infoUI 객체를 _that 변수에 할당합니다.
-	
-		// URL에서 "idx" 파라미터를 가져와서 n 변수에 저장합니다.
+		var _this = this;
+		var _that = infoUI;
 		var n = _this.UrlParameter("idx");
-	
-		// URL에서 "keyword" 파라미터와 "opt" 파라미터를 가져와서 _keyword, _opt 변수에 저장합니다.
 		var _keyword = infoUtil.UrlParameter("keyword");
 		var _opt = infoUtil.UrlParameter("opt");
-	
-		// _opt 변수에 값이 있는 경우 (URL에 "opt" 파라미터가 존재하는 경우)
-		// infoUtil 객체의 Opt 속성에 _opt 값을 설정합니다.
 		if (_opt != "") { infoUtil.Opt = _opt; }
-	
-		// _keyword 변수에 값이 있는 경우 (URL에 "keyword" 파라미터가 존재하는 경우)
-		// infoUtil 객체의 Keyword 속성에 _keyword 값을 설정합니다.
 		if (_keyword != "") { infoUtil.Keyword = _keyword; }
-	
-		// 현재 위치(Location)을 "Notice"로 설정합니다.
 		_this.Location = "Notice";
-	
-		// URL에서 "page" 파라미터를 가져와서 _this 객체의 Page 속성에 설정합니다.
 		_this.Page = _this.UrlParameter("page");
-	
-		// AJAX 요청을 보내서 특정 공지사항의 상세 정보를 가져옵니다.
 		$.ajax({
-			// 주석 처리된 type: "get"은 생략해도 기본 값이 get으로 설정되어 있습니다.
-	
-			// 특정 공지사항의 상세 정보를 가져올 URL을 설정합니다.
+			//type: "get",
 			url: "https://zzzzinfo.com/api/notice/info",
-	
-			// 서버에서 반환하는 데이터 타입을 설정합니다.
-			// JSONP 방식으로 데이터를 받아오기 위해 "jsonp"로 설정합니다.
 			dataType: "jsonp",
-	
-			// 요청을 비동기적으로 처리하도록 설정합니다.
 			async: true,
-	
-			// 요청 결과를 캐시할 수 있도록 설정합니다.
 			cache: true,
-	
-			// 요청 시 서버에 전달할 데이터를 설정합니다.
-			// n 변수에 저장된 특정 공지사항의 ID를 intIdx 파라미터로 넘겨서 서버에 전달합니다.
 			data: {
 				intIdx: n
 			},
-	
-			// 요청이 성공적으로 완료되었을 때 실행되는 콜백 함수입니다.
 			success: function (o) {
-				// 가져온 공지사항의 상세 정보를 infoUI 객체의 NoticeInfo 함수에 전달하여 페이지에 표시합니다.
 				_that.NoticeInfo(o);
 			},
-	
-			// 요청이 실패했을 때 실행되는 콜백 함수입니다.
 			error: function (request, status, error) {
-				// 에러가 발생한 경우, 필요한 처리를 수행하거나 에러 메시지를 출력하는 등의 작업을 수행할 수 있습니다.
-				// 현재 코드에서는 에러 처리가 주석 처리되어 있습니다.
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	},
