@@ -117,7 +117,7 @@
         var azHtml = [];
         for (var i = 0; i < f.length; i++) {
             if (f[i].iskind != "D") {
-                azHtml.push('<li><a href="#" class="img_w"><img alt="" src="' + _that.ImageServer + f[i].file_fullpath + '"><span class="blind">' + o.info.title + "-" + (i+1) +  '</span></a>');
+                azHtml.push('<li><a href="#" class="img_w"><img alt="" src="' + _that.ImageServer + f[i].file_fullpath + '"><span class="blind">' + o.info.title + "-" + (i + 1) + '</span></a>');
             }
         }
         $(".view_img").html(azHtml.join(''));
@@ -193,9 +193,9 @@
         /*
         var azHtml = [];
         for(var i=0; i<f.length; i++){
-        	if (f[i].iskind != "D"){
-        		azHtml.push('<li><a href="#" class="img_w"><img alt="" src="'+_that.ImageServer+ f[i].file_fullpath+'"><span class="blind">'+i+'|'+o.info.code+'</span></a>');
-        	}	
+            if (f[i].iskind != "D"){
+                azHtml.push('<li><a href="#" class="img_w"><img alt="" src="'+_that.ImageServer+ f[i].file_fullpath+'"><span class="blind">'+i+'|'+o.info.code+'</span></a>');
+            }	
         }			
         $(".view_img").html(azHtml.join(''));		
         _this.SetViewer();
@@ -334,19 +334,34 @@
     }
 }
 
+// 문자열을 지정된 길이(len)로 자르는 메서드
 String.prototype.cut = function (len) {
-    var str = this;
-    var l = 0;
+    var str = this; // 메서드를 호출한 문자열을 변수 str에 저장
+    var l = 0; // 문자열의 길이를 저장하는 변수 l을 초기화
     for (var i = 0; i < str.length; i++) {
+        // 문자열의 각 문자에 대해 유니코드 값을 확인하여 길이를 계산
+        // 한글 및 기타 다국어 문자는 2바이트로 계산되며, 영문 및 숫자는 1바이트로 계산
         l += (str.charCodeAt(i) > 128) ? 2 : 1;
+
+        // 누적된 길이가 지정된 길이(len)를 초과하는 경우, 현재까지의 문자열을 반환하고 "..."을 추가하여 줄인 문자열로 표시
         if (l > len) return str.substring(0, i) + "...";
     }
+
+    // 누적된 길이가 지정된 길이(len)를 초과하지 않는 경우, 원본 문자열을 그대로 반환
     return str;
 }
 
+
+// 문자열의 바이트 수를 계산하는 메서드입니다.
 String.prototype.bytes = function () {
-    var str = this;
-    var l = 0;
-    for (var i = 0; i < str.length; i++) l += (str.charCodeAt(i) > 128) ? 2 : 1;
+    var str = this; // 메서드를 호출한 문자열을 변수 str에 저장
+    var l = 0; // 문자열의 길이를 저장하는 변수 l을 초기화
+    for (var i = 0; i < str.length; i++) {
+        // 문자열의 각 문자에 대해 유니코드 값을 확인하여 길이를 계산
+        // 한글 및 기타 다국어 문자는 2바이트로 계산되며, 영문 및 숫자는 1바이트로 계산
+        l += (str.charCodeAt(i) > 128) ? 2 : 1;
+    }
+
+    // 계산된 길이를 반환
     return l;
 }
