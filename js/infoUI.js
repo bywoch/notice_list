@@ -1,32 +1,51 @@
 ﻿var infoUI = {
     NoticeList: function (o) {
+        // 빈 배열 azHtml을 선언 테이블의 내용을 이 배열에 저장
         var azHtml = [];
+    
+        // _this 변수에 현재 객체(this)를 할당 (현재 객체는 이 함수를 포함한 infoUtil 객체)
         var _this = this;
+    
+        // _that 변수에 infoUtil 객체를 할당
         var _that = infoUtil;
+    
+        // 공지사항 정보가 담긴 배열 o의 길이가 0보다 큰 경우
         if (o.length > 0) {
+            // 배열 o를 순회하며 테이블의 각 행을 생성하여 azHtml 배열에 추가
             for (var i = 0; i < o.length; i++) {
                 azHtml.push('<tr>');
-                azHtml.push('<td>' + (_that.Num--) + '</td>');
+                azHtml.push('<td>' + (_that.Num--) + '</td>'); // 번호를 표시하는 열을 추가
                 azHtml.push('<td class="td_tit">');
                 azHtml.push('<div class="in">');
+                // 제목과 해당 공지사항의 링크를 추가
                 azHtml.push('<div class="t_tit"><a href="' + _that.PageNoticeView + o[i].code + '&page=' + _that.Page + '&opt=' + _that.Opt + '&keyword=' + encodeURIComponent(_that.Keyword) + '"><strong>' + o[i].title + '</strong></a>');
+    
+                // 공지사항이 새로운 항목인 경우, "new" 아이콘을 추가
                 if (o[i].is_new) {
                     azHtml.push('<span class="sp_tinfo ico_new">new</span>');
                 }
+    
                 azHtml.push('</div>');
                 azHtml.push('</div>');
                 azHtml.push('</td>');
                 azHtml.push('<td class="date">');
-                azHtml.push('<div class="in">' + o[i].reg_dt_short);
+                azHtml.push('<div class="in">' + o[i].reg_dt_short); // 등록 날짜를 표시하는 열을 추가
                 azHtml.push('</div>');
                 azHtml.push('</td>');
                 azHtml.push('</tr>');
             }
         } else {
+            // 검색된 결과가 없는 경우, "검색된 결과가 없습니다."라는 행을 생성하여 azHtml 배열에 추가
             azHtml.push('<tr><td colspan="3"><div class="in"><div class="t_tit"><strong>검색된 결과가 없습니다.</strong></div></div></td></tr>');
         }
+    
+        // 생성한 테이블 내용을 웹 페이지의 특정 요소에 삽입
         $(".sct_tblarea").find("tbody").html(azHtml.join(''));
+    
+        // _this 객체의 SetPager 메서드를 호출하여 페이징 처리를 수행
         _this.SetPager();
+
+        /*  이 함수는 공지사항 정보가 담긴 배열(o)을 받아와서 NoticeList 함수를 정의하고, 배열 o에 담긴 공지사항 정보를 HTML 테이블로 변환하여 웹 페이지에 표시하는 역할을 함. 생성한 테이블 내용은 jQuery를 사용하여 웹 페이지의 특정 요소에 삽입되고, 마지막으로 _this.SetPager() 메서드를 호출하여 페이징 처리를 수행함*/
 
     },
     NoticeInfo: function (o) {
