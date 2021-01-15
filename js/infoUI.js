@@ -281,79 +281,107 @@
         _this.SetPager();
     },
     SetViewer: function () {
-        $('.view_img,.mphoto_list,.pa_list').children().find('a:first').bind('click', function () {
+        // 이미지 뷰어를 활성화할 요소들에 클릭 이벤트를 바인딩
+        $('.view_img, .mphoto_list, .pa_list').children().find('a:first').bind('click', function () {
+            // 이미지 뷰어 표시를 위해 페이지를 480px 아래로 스크롤
             $('html, body').stop().animate({
                 scrollTop: 480
             });
+    
+            // 이미지 뷰어 요소를 보여줍니다.
             $('.photoview_abs').show();
+    
+            // 이미지 뷰어에 포커스를 주어 키보드 이벤트를 사용할 수 있게함 
             $('.photoview_abs').attr('tabIndex', -1);
             $('.photoview_abs').focus();
+    
+            // 페이지를 불투명하게 만들어 모달 효과를 적용
             $('#wrap').addClass('dimmed_on');
+    
+            // 클릭한 이미지의 인덱스와 코드를 가져옴
             var a = $(this).find('span').first().text().split('|');
-            var n = a[0];
-            var c = a[1];
-            var d = ($("#hdnDataType").val() != "" ? $("#hdnDataType").val() : "view");
-
+            var n = a[0]; // 인덱스
+            var c = a[1]; // 코드
+            var d = ($("#hdnDataType").val() != "" ? $("#hdnDataType").val() : "view"); // 데이터 타입 설정
+    
+            // 이미지 갤러리 뷰어를 초기화하고 설정
             $('.gallery_wrap').hivegallery({
-                view_num: 10,
-                closefocus: n,
-                curr_idx: c,
-                category: $("#hdnCategory").val(),
-                data_type: d,
-                thumb_width: 85
+                view_num: 10, // 한 번에 보여줄 이미지 개수
+                closefocus: n, // 뷰어를 닫았을 때 포커스를 이동시킬 이미지의 인덱스
+                curr_idx: c, // 현재 이미지의 인덱스
+                category: $("#hdnCategory").val(), // 카테고리 설정
+                data_type: d, // 데이터 타입 설정
+                thumb_width: 85 // 썸네일 이미지 너비 설정
             });
-
+    
+            // 기본 링크 동작을 중단
             return false;
         });
-    },
+    },    
     SetPager: function () {
         var _this = this;
         var _that = infoUtil;
         var azHtml = [];
-
+    
+        // 전체 페이지 개수가 1개인 경우, 현재 페이지를 보여주는 링크를 생성하고 반환
         if (_that.TotalPage == 1) {
             azHtml.push('<a href="#none" data-page-num="1" class="current">1</a>');
             $(".page").html(azHtml.join(''));
             return;
         }
-
+    
+        // 현재 페이지가 _that.Size보다 큰 경우, 맨처음 페이지로 이동하는 링크를 생성
         if (_that.Page > _that.Size) {
             azHtml.push('<a href="#none" data-page-num="1" class="btn_page btn_first"><span class="sp_tinfo">맨처음 페이지</span></a>');
         }
-
+    
+        // 현재 블록의 첫 페이지가 1보다 큰 경우, 이전 블록으로 이동하는 링크를 생성
         if (_that.BlockPage > 1) {
             azHtml.push('<a href="#none" data-page-num="' + (_that.BlockPage - 1) + '" class="btn_page btn_prev"><span class="sp_tinfo">이전 페이지</span></a>');
         }
+    
+        // 현재 블록의 첫 페이지부터 PageSize 만큼의 페이지 번호를 생성
         for (var i = _that.BlockPage; i < _that.BlockPage + _that.PageSize; i++) {
+            // 현재 페이지가 아닌 경우, 일반 페이지 번호 링크를 생성
             if (i != _that.Page) {
                 azHtml.push('<a href="#none" data-page-num="' + i + '">' + i + '</a>');
             } else {
+                // 현재 페이지인 경우, 현재 페이지를 나타내는 표시와 함께 페이지 번호 링크를 생성
                 azHtml.push('<a href="#none" data-page-num="' + i + '" class="current">' + i + '</a>');
             }
+    
+            // 전체 페이지 개수를 넘어간 경우, 반복문을 종료
             if (i >= _that.TotalPage) {
                 break;
             }
         }
-
+    
+        // 다음 블록으로 이동하는 링크를 생성
         if ((_that.BlockPage + _that.PageSize) <= _that.TotalPage) {
             azHtml.push('<a href="#none" data-page-num="' + (_that.BlockPage + _that.PageSize) + '" class="btn_page btn_next"><span class="sp_tinfo">다음 페이지</span></a>');
         }
+    
+        // 마지막 페이지로 이동하는 링크를 생성
         if (_that.Page < _that.TotalPage) {
             azHtml.push('<a href="#none" data-page-num="' + (_that.TotalPage) + '" class="btn_page btn_last"><span class="sp_tinfo">맨마지막 페이지</span></a>');
         }
-
-
+    
+        // 생성한 페이지 번호 링크들을 .page 요소에 추가
         $(".page").html(azHtml.join(''));
+    
+        // 페이지 번호 링크를 클릭하면 ChangePage 함수를 호출하여 해당 페이지로 이동
         $(".page a").bind("click", function () {
             _this.ChangePage($(this).attr("data-page-num"));
         });
+    
+        // 링크의 href 속성이 "#none"인 경우, 클릭 이벤트를 중단하고 페이지 맨 위로 스크롤
         $('.page a[href="#none"]').click(function (w) {
             w.preventDefault();
             $('html, body').stop().animate({
                 scrollTop: 0
             });
         });
-    },
+    },    
     // 페이지 전환 함수 페이지 번호(p)를 인자로 받아옴
     ChangePage: function (p) {
         // _this 변수에 현재 객체(this)를 할당 (현재 객체는 이 함수를 포함한 infoUtil 객체)
