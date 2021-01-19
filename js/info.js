@@ -268,14 +268,25 @@
 	NewsLetterInfo: function () {
 		var _this = this;
 		var _that = infoUI;
+		// URL에서 "idx" 파라미터를 가져와서 n 변수에 할당 만약 값이 없으면 0으로 설정
 		var n = (_this.UrlParameter("idx") == "" ? 0 : _this.UrlParameter("idx"));
+
+		// URL에서 "keyword"와 "opt" 파라미터를 가져와서 _keyword와 _opt 변수에 할당
 		var _keyword = infoUtil.UrlParameter("keyword");
 		var _opt = infoUtil.UrlParameter("opt");
+		
+		// 만약 _opt 값이 비어있지 않다면, infoUtil 객체의 Opt에 할당
 		if (_opt != "") { infoUtil.Opt = _opt; }
+	
+		// 만약 _keyword 값이 비어있지 않다면, infoUtil 객체의 Keyword에 할당
 		if (_keyword != "") { infoUtil.Keyword = _keyword; }
+	
+		// 뉴스레터 위치를 "NewsLetter"로 설정
 		_this.Location = "NewsLetter";
+	
+		// URL에서 "page" 파라미터를 가져와서 _this.Page에 할당
 		_this.Page = _this.UrlParameter("page");
-
+	
 		$.ajax({
 			//type: "get",
 			url: "https://zzzzinfo.com/api/newsletter/info",
@@ -283,9 +294,11 @@
 			async: true,
 			cache: true,
 			data: {
+				// API 요청 시, intIdx 파라미터에 n 값을 전달 만약 n 값이 비어있다면 0을 전달
 				intIdx: n = "" ? 0 : n
 			},
 			success: function (o) {
+				// API 요청이 성공하면 _that 객체의 NewsLetterInfo 함수를 호출하여 데이터를 처리
 				_that.NewsLetterInfo(o);
 			},
 			error: function (request, status, error) {
