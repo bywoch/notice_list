@@ -280,27 +280,37 @@ $(function () {
         });
     }
 
-    //데이터 그리기
+    // 데이터 그리기 함수
     $.hivegallery.htmlData = function (settings, o) {
         var numwidth = null;
+
+        // settings 객체의 자식 요소들의 가로 폭을 모두 더하여 numwidth 변수에 할당
         settings.obj.children().each(function () {
             numwidth += $(this).outerWidth(true);
         });
+
+        // settings 객체의 너비를 numwidth 값으로 설정하여 요소들이 모두 수평으로 나열되도록
         settings.obj.css({
             width: numwidth
         });
 
+        // 만약 o 값이 "now"인 경우, 현재 상태의 효과를 설정하고, 메뉴의 처음 보이는 위치를 결정
         if (o == "now") {
             // 효과 세팅하기
-            settings.wrapbox.find('.total').text(settings.total_num);
-            // 처음 메뉴 보이는 위치
+            settings.wrapbox.find('.total').text(settings.total_num); // 총 개수를 표시하는 요소에 총 개수를 설정
+
+            // 현재 상태의 효과를 적용
             $.hivegallery.effect(settings.obj, settings, self.htInfo.nCurrent);
+
+            // 메뉴의 처음 보이는 위치를 설정
             $.hivegallery.htmlPos(settings, self.htInfo.nCurrent);
         }
+
+        // 만약 o 값이 "next"인 경우, 이전 상태의 위치로 이동
         if (o == "next") {
+            // 이전 상태의 위치로 이동
             $.hivegallery.htmlPos(settings, settings.prev_current);
         }
-
     }
 
     $.hivegallery.htmlPos = function (settings, pos) {
@@ -390,13 +400,18 @@ $(function () {
 
 })(jQuery);
 
-// **** remove Opacity-Filter in ie ****
+// **** IE에서 Opacity-Filter 제거 ****
 function removeFilter(element) {
+    // element의 style에 'removeAttribute' 메서드가 존재 확인
     if (element.style.removeAttribute) {
+        // 사용 가능한 경우, 'filter' 속성을 제거하여 IE에서 Opacity-Filter를 비활성화
         element.style.removeAttribute('filter');
     };
 }
 
 function nLoggerFn(src) {
+    // 이 함수는 특정 로깅 시스템('nLogger')과 사용 컨텍스트에 특화된 사용자 정의 로깅 함수
+    // 'nLogger' 객체를 사용하여 'click' 이벤트를 로그로 기록하며, '_u_depth1' 속성을 "https:" + src로 설정
+    // 이 함수의 목적은 특정 로깅 또는 분석 라이브러리와 관련되어 있으며, 더 큰 로깅 프레임워크의 일부일 수 있음
     nLogger.event('click', { _u_depth1: "https:" + src });
 }
